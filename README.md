@@ -1,5 +1,5 @@
 
-testdata repository contains all lab reports
+testdata repository contains actual lab reports photos from different hospitals.
 
 
 VALUE    {"low": float, "high": float|null, "operator": ""|"<"|">", "raw": str}
