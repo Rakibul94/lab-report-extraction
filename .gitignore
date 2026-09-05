@@ -1,0 +1,26 @@
+
+# --- Python artifacts ---
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Virtual environment ---
+.venv/
+venv/
+
+# --- Secrets (never commit) ---
+.env
+.env.*
+!.env.example
+
+# --- Editor / OS noise ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Session / scratch files (this project) ---
+session*.json
+recordings/
