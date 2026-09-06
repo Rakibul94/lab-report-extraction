@@ -1,0 +1,2 @@
+
+I looked into three potential OCR engines for selecting RealOCR for the project: Tesseract, EasyOCR, RapidOCR.Since project requirements were OCR extraction should have success even if pictures have dim or poor lighting or parts being cropped out.EasyOCR and RapidOCR already does better here compared to Tesseract.Also another requirement was that OCR extraction should on both english and bengali language.Since EasyOCR already has it and no official module avaiable for RapidOCR for bengali text extraction.Hence,I finally picked EasyOCR as actual RealOCR for the project.
