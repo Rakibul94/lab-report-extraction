@@ -1,0 +1,13 @@
+
+{
+  "lines": [
+    {"text": "CITY DIAGNOSTIC LABORATORY", "confidence": 0.90},
+    {"text": "রোগীর নাম : মোঃ রফিকুল ইসলাম", "confidence": 0.68},
+    {"text": "বয়স : ৩৪ বছর   লিঙ্গ : পুরুষ", "confidence": 0.65},
+    {"text": "রিপোর্টের তারিখ : ১৫/০৩/২০২৪", "confidence": 0.70},
+    {"text": "রেফারেন্স নং : LAB-2024-00999", "confidence": 0.85},
+    {"text": "INVESTIGATION", "confidence": 0.88},
+    {"text": "Haemoglobin          11.2         gm/dl         13.0 - 17.0   LOW", "confidence": 0.82},
+    {"text": "Fasting Blood Sugar  98           mg/dL         70 - 110", "confidence": 0.86}
+  ]
+}

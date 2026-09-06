@@ -1,0 +1,37 @@
+
+{
+  "lines": [
+    {"text": "CITY DIAGNOSTIC LABORATORY", "confidence": 0.95},
+    {"text": "48, Lakeview Road, Metropolis - 500001", "confidence": 0.88},
+    {"text": "Phone: 555-0112  citydiag@example.com", "confidence": 0.81},
+    {"text": "PATIENT INFORMATION", "confidence": 0.93},
+    {"text": "Name : John Doe", "confidence": 0.94},
+    {"text": "Age : 34 Years   Sex: Male", "confidence": 0.9},
+    {"text": "Referred by : Dr. A. Smith (Cardiology)", "confidence": 0.86},
+    {"text": "Report Date : 15/03/2024", "confidence": 0.92},
+    {"text": "Reference No : LAB-2024-00871", "confidence": 0.95},
+    {"text": "Collected : 14/03/2024 08:40   Reported : 15/03/2024 17:22", "confidence": 0.79},
+    {"text": "INVESTIGATION", "confidence": 0.96},
+    {"text": "Test                 Result       Unit          Reference Range", "confidence": 0.84},
+    {"text": "Haemoglobin          13.5         gm/dl         13.0 - 17.0", "confidence": 0.87},
+    {"text": "WBC Count            12,500       /cumm         4,000 - 11,000   HIGH", "confidence": 0.83},
+    {"text": "RBC Count            4.8          mill/mm3      4.5 - 5.9", "confidence": 0.85},
+    {"text": "Platelet Count       1.2 x 10^3/µL              150 - 450   LOW", "confidence": 0.78},
+    {"text": "Haematocrit          44.2         %             40 - 52", "confidence": 0.89},
+    {"text": "Fasting Blood Sugar  98           mg/dL         70 - 110", "confidence": 0.9},
+    {"text": "Cholesterql, Total   212          mg/dL.        < 200       HIGH", "confidence": 0.74},
+    {"text": "HDL Cholesterol      38           mg/dL         40 - 60", "confidence": 0.88},
+    {"text": "Vitamin D (25-OH)    <0.5         ng/mL         8.0 - 50.0", "confidence": 0.72},
+    {"text": "Serum Creatinine     0.8 - 1.2    mg/dL         0.6 - 1.4", "confidence": 0.86},
+    {"text": "Urea                 32           mg/dL         15 - 45", "confidence": 0.91},
+    {"text": "Uric Acid            5.1          mg/dL         3.4 - 7.0", "confidence": 0.9},
+    {"text": "TSH                  2.4          µlU/mL        0.4 - 4.2", "confidence": 0.82},
+    {"text": "Urine Culture : No growth after 48 hrs incubation", "confidence": 0.8},
+    {"text": "Method : Photometric, end-point", "confidence": 0.77},
+    {"text": "* Values are statistical estimates only", "confidence": 0.85},
+    {"text": "Page 1 of 1", "confidence": 0.96},
+    {"text": "** End of Report **", "confidence": 0.97},
+    {"text": "Dr. R. Mehta, MD (Pathology)", "confidence": 0.89},
+    {"text": "~", "confidence": 0.31}
+  ]
+}

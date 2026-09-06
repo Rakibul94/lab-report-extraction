@@ -1,0 +1,19 @@
+
+
+{
+  "lines": [
+    {"text": "STAR COFFEE CO.", "confidence": 0.93},
+    {"text": "12 Main Street, Metropolis", "confidence": 0.9},
+    {"text": "Receipt #0043", "confidence": 0.92},
+    {"text": "15/03/2024 09:12", "confidence": 0.89},
+    {"text": "Latte 4.50", "confidence": 0.87},
+    {"text": "Cappuccino 4.50", "confidence": 0.88},
+    {"text": "Croissant 3.25", "confidence": 0.85},
+    {"text": "Orange Juice 3.95", "confidence": 0.86},
+    {"text": "Subtotal 15.20", "confidence": 0.9},
+    {"text": "Tax 1.37", "confidence": 0.91},
+    {"text": "TOTAL 16.57", "confidence": 0.92},
+    {"text": "Thank you, come again!", "confidence": 0.83},
+    {"text": "Card **** 4242", "confidence": 0.8}
+  ]
+}

@@ -1,0 +1,19 @@
+
+
+{
+  "lines": [
+    {"text": "CITY DIAGNOSTIC LABORAT0RY", "confidence": 0.71},
+    {"text": "Name  John Doe", "confidence": 0.66},
+    {"text": "Age 34Y  Male", "confidence": 0.62},
+    {"text": "Report Date 2024-03-15", "confidence": 0.7},
+    {"text": "Reference No LAB-2024-OO871", "confidence": 0.68},
+    {"text": "INVESTIGATION", "confidence": 0.75},
+    {"text": "Haemog1obin 13.5 gm/dl 13.0 -17.0", "confidence": 0.58},
+    {"text": "WBC Count 12.500 /cumm 4.0 - 11.0 x10'3/uL HIGH", "confidence": 0.52},
+    {"text": "Platelet Count 1.2 x 10^3/pL 150 - 450", "confidence": 0.55},
+    {"text": "Fasting BIood Sugar 98 mg/dL 70 - 110", "confidence": 0.61},
+    {"text": "Vitamin D <0.5 ng/mL 8.0 -", "confidence": 0.44},
+    {"text": "Serum Creati", "confidence": 0.39},
+    {"text": "ene eree eree", "confidence": 0.22}
+  ]
+}
