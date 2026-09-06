@@ -17,10 +17,26 @@ class Settings(BaseSettings):
     )
 
     app_name: str = "lab-report-extraction"
-    provider: Literal["mock", "tesseract"] = "mock"   # default = mock: no creds, no model
+    provider: Literal["mock", "tesseract", "easyocr"] = "mock"   # default = mock: no creds, no model
     recordings_dir: Path = Path("recordings")
     default_recording: str = "report_001.json"
     max_upload_bytes: int = 10 * 1024 * 1024          # reject >10 MB at the boundary
+
+
+
+    # --- tesseract (system binary + traineddata files) ---
+    tesseract_cmd: str | None = None
+    tesseract_lang: str = "eng+ben"        # '+' = both scripts in one pass
+    tesseract_preprocess: bool = True
+
+
+
+    # --- easyocr (pip-only; downloads recogniser weights on first start) ---
+    easyocr_langs: str = "en,bn"           # comma string, NOT a list - see note
+    easyocr_gpu: bool = False
+    easyocr_max_side: int = 1280           # EasyOCR's detector is heavy: cap input pixels
+    easyocr_model_dir: Path | None = None  # point here + download=false = pre-baked weights
+    easyocr_download: bool = True
 
 
 def get_settings() -> Settings:
