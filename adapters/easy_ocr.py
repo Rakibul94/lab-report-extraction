@@ -7,7 +7,7 @@ import logging
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, UnidentifiedImageError
+from PIL import Image, ImageOps, UnidentifiedImageError
 
 from adapters.box_grouping import boxes_to_reading_order
 from services.ocr_port import (
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 class EasyOCRProvider(OCRProvider):
-    """Real OCR V2: EasyOCR detection+recognition, CPU-only, bilingual.
+    """Easy OCR: EasyOCR detection+recognition, CPU-only, bilingual.
 
     The ONLY file importing easyocr. One detector pass feeds two
     recognisers (en + bn by config). First init downloads ~80 MB of
@@ -29,7 +29,7 @@ class EasyOCRProvider(OCRProvider):
     """
 
 
-def __init__(
+    def __init__(
         self,
         languages: list[str],
         gpu: bool = False,
@@ -49,7 +49,7 @@ def __init__(
         self.max_side = max_side
         logger.info("EasyOCR ready: languages=%s gpu=%s", languages, gpu)
 
-def extract(self, image_bytes: bytes, *, filename: str = "") -> OCRResult:
+    def extract(self, image_bytes: bytes, *, filename: str = "") -> OCRResult:
         image = self._load(image_bytes)
         try:
             raw = self._reader.readtext(image, detail=1, paragraph=False)
@@ -59,12 +59,14 @@ def extract(self, image_bytes: bytes, *, filename: str = "") -> OCRResult:
             return OCRResult(lines=())
         return boxes_to_reading_order(raw)
 
-def _load(self, image_bytes: bytes) -> np.ndarray:
+    def _load(self, image_bytes: bytes) -> np.ndarray:
         try:
-            image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+            image = Image.open(io.BytesIO(image_bytes))
+            image = ImageOps.exif_transpose(image)   # phone photos: honour rotation metadata
+            image = image.convert("RGB")
         except UnidentifiedImageError as e:
             raise OCRPermanentError("Unsupported or corrupt image") from e
-        w, h = image.size                # detector cost scales with pixels
+        w, h = image.size
         scale = self.max_side / max(w, h)
         if scale < 1.0:
             image = image.resize((int(w * scale), int(h * scale)))
