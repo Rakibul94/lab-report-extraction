@@ -35,15 +35,18 @@ _NUMBER = r"\d[\d,]*(?:\.\d+)?"
 
 _POINT_RE      = re.compile(rf"^(?P<op>[<>])\s*(?P<num>{_NUMBER})$")
 _MULT_RE       = re.compile(rf"^(?P<num>{_NUMBER})\s*[x×]\s*10\s*\^?(?P<exp>\d+)$")
-_MULT_UNIT_RE  = re.compile(rf"^(?P<num>{_NUMBER})\s*[x×]\s*(?P<unit>10\s*\^?\s*\d+\s*/\s*\S+)$")
+MULT_UNIT_RE  = re.compile(rf"^(?P<num>{_NUMBER})\s*[x×]\s*(?P<unit>10\s*\^?\s*\d+\s*/\s*\S+)$")
 _INTERVAL_RE   = re.compile(rf"^(?P<lo>{_NUMBER})\s*-\s*(?P<hi>{_NUMBER})$")
 _OPEN_HIGH_RE  = re.compile(rf"^(?P<lo>{_NUMBER})\s*-$")
 _OPEN_LOW_RE   = re.compile(rf"^-\s*(?P<hi>{_NUMBER})$")
 
 
+_BANGLA_DIGITS = str.maketrans("০১২৩৪৫৬৭৮৯", "0123456789")
+
 def to_float(text: str) -> float | None:
     """'12,500' -> 12500.0 ; '0.8' -> 0.8 ; '12/03' -> None (not a plain number)."""
-    if not re.fullmatch(rf"[<>]?\s*{_NUMBER}", text.strip()):
+    text = text.strip().translate(_BANGLA_DIGITS)
+    if not re.fullmatch(rf"[<>]?\s*{_NUMBER}", text):
         return None
     return float(text.replace("<", "").replace(">", "").replace(",", "").strip())
 

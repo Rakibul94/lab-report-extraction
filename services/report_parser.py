@@ -6,17 +6,17 @@ from dataclasses import dataclass, field
 
 from services.ocr_port import OCRResult
 from services.value_normaliser import (
-    Range, Unit, Value, parse_date, parse_range, parse_unit, parse_value, to_float,
+    MULT_UNIT_RE, Range, Unit, Value, parse_date, parse_range, parse_unit, parse_value, to_float,
 )
 
 @dataclass(frozen=True)
 class ResultRow:
     test_name: str
-    value: Value | None = None
+    value: Value                 # required: every result carries a numeric value
     unit: Unit | None = None
     reference_range: Range | None = None
-    date: str | None = None   # "H", "L", "" — canonical
-    raw_text: str = ""   #verbatim,never touched
+    flag: str = ""               # "H", "L", "E", ""
+    raw_line: str = ""           # verbatim OCR line, never touched
 
 
 @dataclass
@@ -34,18 +34,28 @@ class Meta:
 class ParsedReport:
     meta: Meta = field(default_factory=Meta)
     results: tuple[ResultRow, ...] = ()
-    unparsed: tuple[str, ...] = ()
+    unparsed: tuple[str, ...] = () #Leftover lines that got rejected
 
 
 _FLAG = {"high": "H", "h": "H", "low": "L", "l": "L", "*": "H", "e": "E"}
 
-_LAB_KEYWORDS = re.compile(r"(?i)\b(lab|diagnosti|patholog|clinic|hospital)")
+_BN = "\u0980-\u09FF"   # the Bangla Unicode block, for readable char classes
+
+_LAB_KEYWORDS = re.compile(
+    r"(?i)\b(lab|diagnosti|patholog|clinic|hospital|"
+    r"ল্যাব|ডায়াগনস্টিক|প্যাথলজি|ক্লিনিক|হাসপাতাল)")
 
 _META_PATTERNS = [
-    ("patient_name", re.compile(r"(?i)\bname\s*:?\s*([A-Za-z][A-Za-z .'-]{2,})")),
-    ("age_and_sex",  re.compile(r"(?i)\bage\s*:?\s*(\d{1,3})\s*(years?|yrs?|y)?\s*(?:,)?\s*(?:sex\s*:?\s*)?(male|female|m|f)?")),
-    ("report_date",  re.compile(r"(?i)\breport(?:ed)?\s+date\s*:?\s*([0-9][0-9./-]{6,10})")),
-    ("reference_no", re.compile(r"(?i)\breference\s*(?:no|number|#)\s*:?\s*([A-Za-z0-9/-]+)")),
+    ("patient_name",
+     re.compile(rf"(?i)\b(?:name|নাম)\s*:?\s*([A-Za-z{_BN}][A-Za-z{_BN} .:'\-]{{2,}})")),
+    ("age_and_sex",
+     re.compile(rf"(?i)(?:\bage\b|বয়স)\s*:?\s*(\d{{1,3}}|[০-৯]{{1,3}})\s*"
+                rf"(?:years?|yrs?|y|বছর)?\s*,?\s*(?:(?:sex\s*:?|লিঙ্গ\s*:?)\s*)?"
+                rf"(male|female|m|f|পুরুষ|মহিলা|নারী)?")),
+    ("report_date",
+     re.compile(r"(?i)(?:report(?:ed)?\s+date|রিপোর্টের\s+তারিখ|তারিখ)\s*:?\s*([0-9০-৯][0-9০-৯./-]{5,10})")),
+    ("reference_no",
+     re.compile(r"(?i)\b(?:reference\s*(?:no|number|#)|রেফারেন্স\s*(?:নং|নাম্বার)?)\s*:?\s*([A-Za-z0-9/-]+)")),
 ]
 
 _NOT_RESULT = re.compile(
@@ -75,9 +85,13 @@ class ReportParser:
         for key, pattern in _META_PATTERNS:
             if getattr(meta, key, None) is None and (m := pattern.search(text)):
                 if key == "age_and_sex":
-                    meta.age = m[1] + (m[2] or "")[:1].upper() or None
+                    unit = "Y" if m[2] else ""           # years/yrs/y/বছর -> one canonical unit
+                    meta.age = m[1].translate(_BANGLA_DIGITS) + unit or None
                     if m[3]:
-                        meta.sex = {"male": "M", "female": "F", "m": "M", "f": "F"}[m[3].lower()]
+                        meta.sex = {
+                            "male": "M", "female": "F", "m": "M", "f": "F",
+                            "পুরুষ": "M", "মহিলা": "F", "নারী": "F",
+                        }[m[3].lower()]
                 elif key == "report_date":
                     meta.report_date_raw = m[1]
                     meta.report_date = parse_date(m[1])
@@ -109,7 +123,7 @@ class ReportParser:
             return None
 
         name = " ".join(tokens)
-        if len(name) < 3 or not re.search(r"[A-Za-z]{3}", name):
+        if len(name) < 3 or not re.search(r"[A-Za-z]{3}", name): # The gate
             return None
         return ResultRow(name, value, unit, reference, flag, text)
 
@@ -135,18 +149,30 @@ class ReportParser:
                 continue
             candidate = " ".join(tokens[-take:])
 
-            if m := _MULT_UNIT_RE.fullmatch(candidate):        # '1.2 x 10^3/µL'
-                v = parse_value(m["num"]); u = parse_unit(re.sub(r"\s", "", m["unit"]))
-                if v: del tokens[-take:]; return v, u
+            # '1.2 x 10^3/µL' -> multiplier belongs to the UNIT, no arithmetic
+            if m := MULT_UNIT_RE.fullmatch(candidate):
+                if v := parse_value(m["num"]):
+                    unit = parse_unit(re.sub(r"\s+", "", m["unit"]))
+                    del tokens[-take:]
+                    return v, unit
 
             parts = candidate.split()
-            maybe_value, maybe_unit = parts[0], " ".join(parts[1:])
 
-            if (v := parse_value(" ".join(parts[-2:]))) is not None and len(parts) >= 3 \
-                    and _INTERVALish(" ".join(parts[-2:])):     # '0.8 - 1.2 mg/dL'
-                del tokens[-take:]; return v, Unit(maybe_unit, maybe_unit) if maybe_unit else None
-
-            if parse_unit(maybe_unit or maybe_value).canonical and (v := parse_value(maybe_value)):
+            # '0.8 - 1.2 mg/dL' -> interval value with unit glued after
+            if len(parts) >= 4 and (v := parse_value(" ".join(parts[:-1]))) is not None:
+                unit = parse_unit(parts[-1])
                 del tokens[-take:]
-                return v, parse_unit(maybe_unit) if maybe_unit else None
+                return v, unit
+
+            # '13.5 gm/dl' -> point value + unit (guard: unit must NOT be a number)
+            if len(parts) >= 2 and (v := parse_value(parts[0])) is not None \
+                    and to_float(parts[1]) is None:
+                unit = parse_unit(" ".join(parts[1:]))
+                del tokens[-take:]
+                return v, unit
+
+            # '212' -> bare value
+            if (v := parse_value(candidate)) is not None:
+                del tokens[-take:]
+                return v, None
         return None, None
