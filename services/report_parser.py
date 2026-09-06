@@ -123,6 +123,8 @@ class ReportParser:
             return None
 
         name = " ".join(tokens)
+        if ":" in name:
+            return None
         if len(name) < 3 or not re.search(r"[A-Za-z]{3}", name): # The gate
             return None
         return ResultRow(name, value, unit, reference, flag, text)

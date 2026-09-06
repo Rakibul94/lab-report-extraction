@@ -103,7 +103,7 @@ _TEXT_RE  = re.compile(r"^(\d{1,2})\s+([A-Za-z]{3,})\s+(\d{4})$")
 
 def parse_date(text: str) -> str | None:
     """Canonical YYYY-MM-DD. Ambiguous D/M vs M/D returns None (caller keeps raw)."""
-    text = text.strip()
+    text = text.strip().translate(_BANGLA_DIGITS)
     if m := _ISO_RE.fullmatch(text):
         return text
     if m := _SLASH_RE.fullmatch(text):

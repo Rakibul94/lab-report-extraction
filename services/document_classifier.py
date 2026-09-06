@@ -6,9 +6,9 @@ import re
 from services.ocr_port import OCRResult
 
 _EVIDENCE = re.compile(
-    r"(?i)\b(patient|age\s*:?\s*\d|sex|report date|reference|investigation|"
+    r"(?i)\b(patient|age\s*:?\s*\d+|sex|report date|reference|investigation|"
     r"laborator|diagnosti|patholog|haemoglobin|glucose|cholesterol|creatinine|"
-    r"রোগী|বয়স|লিঙ্গ|প্রতিবেদন|রেফারেন্স|পরীক্ষা|রিপোর্ট)\b")
+    r"রোগী|বয়স|লিঙ্গ|প্রতিবেদন|রেফারেন্স|পরীক্ষা|রিপোর্ট)")
 
 _ROWISH = re.compile(r"^[A-Za-z][A-Za-z ()/,%-]*\s+[<>]?\d[\d,.]*")
 

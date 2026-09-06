@@ -32,7 +32,7 @@ class Settings(BaseSettings):
 
 
     # --- easyocr (pip-only; downloads recogniser weights on first start) ---
-    easyocr_langs: str = "en,bn"           # comma string, NOT a list - see note
+    easyocr_langs: str = "en"           # comma string, NOT a list - see note
     easyocr_gpu: bool = False
     easyocr_max_side: int = 1280           # EasyOCR's detector is heavy: cap input pixels
     easyocr_model_dir: Path | None = None  # point here + download=false = pre-baked weights
