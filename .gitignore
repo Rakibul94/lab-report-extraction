@@ -21,6 +21,3 @@ venv/
 .DS_Store
 Thumbs.db
 
-# --- Session / scratch files (this project) ---
-session*.json
-recordings/
