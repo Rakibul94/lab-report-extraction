@@ -23,9 +23,9 @@ class ExtractionOutcome:
     """
      
     is_lab_report: bool
-    meta: Meta
-    results: tuple[ResultRow, ...]
-    unparsed: tuple[str, ...]
+    meta: Meta = field(default_factory=Meta)
+    results: tuple[ResultRow, ...] = ()
+    unparsed: tuple[str, ...] = ()
 
 
 class LabReportService:

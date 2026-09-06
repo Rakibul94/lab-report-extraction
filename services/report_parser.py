@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 
 from services.ocr_port import OCRResult
 from services.value_normaliser import (
-    MULT_UNIT_RE, Range, Unit, Value, parse_date, parse_range, parse_unit, parse_value, to_float,
+    MULT_UNIT_RE, Range, Unit, Value, parse_date, parse_range, parse_unit, parse_value, to_float, _BANGLA_DIGITS,
 )
 
 @dataclass(frozen=True)
@@ -50,7 +50,7 @@ _META_PATTERNS = [
      re.compile(rf"(?i)\b(?:name|নাম)\s*:?\s*([A-Za-z{_BN}][A-Za-z{_BN} .:'\-]{{2,}})")),
     ("age_and_sex",
      re.compile(rf"(?i)(?:\bage\b|বয়স)\s*:?\s*(\d{{1,3}}|[০-৯]{{1,3}})\s*"
-                rf"(?:years?|yrs?|y|বছর)?\s*,?\s*(?:(?:sex\s*:?|লিঙ্গ\s*:?)\s*)?"
+                rf"(years?|yrs?|y|বছর)?\s*,?\s*(?:(?:sex\s*:?|লিঙ্গ\s*:?)\s*)?"
                 rf"(male|female|m|f|পুরুষ|মহিলা|নারী)?")),
     ("report_date",
      re.compile(r"(?i)(?:report(?:ed)?\s+date|রিপোর্টের\s+তারিখ|তারিখ)\s*:?\s*([0-9০-৯][0-9০-৯./-]{5,10})")),
