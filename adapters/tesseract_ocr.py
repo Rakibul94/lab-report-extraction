@@ -22,7 +22,7 @@ class TesseractOCRProvider(OCRProvider):
         try:
             image = Image.open(image_path)
             data = pytesseract.image_to_data(
-                image, lang="eng", output_type=pytesseract.Output.DICT
+                image, lang="eng+ben", output_type=pytesseract.Output.DICT
             )
         except pytesseract.TesseractNotFoundError as error:
             raise OCRPermanentError("Tesseract binary is not installed") from error
