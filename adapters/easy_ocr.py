@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 class EasyOCRProvider(OCRProvider):
-    "This is the OCR engine is selected for Real OCR"
+    "This OCR engine is selected for Real OCR"
     """Easy OCR: EasyOCR detection+recognition, CPU-only, bilingual.
 
     The ONLY file importing easyocr. One detector pass feeds two

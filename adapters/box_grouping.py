@@ -8,7 +8,7 @@ from services.ocr_port import OCRLine, OCRResult
 def boxes_to_reading_order(items: list) -> OCRResult:
     """Group (box, text, score) detections into reading-order lines.
 
-    Shared by every detection+recognition engine (EasyOCR, RapidOCR, ...).
+    Shared by every detection+recognition engine (EasyOCR).
     Box = 4 (x, y) corners, any order. Text joined with single spaces;
     scores clamped to the port's 0.0-1.0 contract then averaged per line.
     """
