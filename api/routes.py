@@ -38,11 +38,10 @@ def create_router(service: LabReportService, settings: Settings) -> APIRouter:
         warnings: list[str] = []
         if not outcome.is_lab_report:
             warnings.append("Document does not appear to be a lab report.")
-        else:
-            warnings.extend(
-                f"Unparsed line preserved verbatim: {line!r}"
-                for line in outcome.unparsed
-            )
+        warnings.extend(
+            f"Unparsed line preserved verbatim: {line!r}"
+            for line in outcome.unparsed
+        )
 
         return ExtractResponse(
             meta=MetaOut(
