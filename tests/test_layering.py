@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-SDKS = {"pytesseract", "easyocr", "torch", "cv2", "numpy", "PIL", "rapidocr"}
+SDKS = {"easyocr", "torch", "cv2", "numpy", "PIL"}
 IMPORT = re.compile(r"^\s*(?:from|import)\s+([\w.]+)", re.M)
 
 
@@ -22,6 +22,7 @@ def test_services_import_no_fastapi():
 
 
 def test_no_sdk_outside_adapters():
-    files = [*py_files("api"), *py_files("services"), (Path(__file__).resolve().parent.parent / "main.py")]
+    main_py = Path(__file__).resolve().parent.parent / "main.py"
+    files = [*py_files("api"), *py_files("services"), main_py]
     offenders = {f.name: imports_of(f) & SDKS for f in files}
     assert not any(offenders.values()), offenders

@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from pathlib import Path
 
 
 class OCRProviderError(Exception):
@@ -48,7 +47,8 @@ class OCRResult:
 
 
 class OCRProvider(ABC):
-   def extract(self, image_bytes: bytes, *, filename: str = "") -> OCRResult:
+    @abstractmethod
+    def extract(self, image_bytes: bytes, *, filename: str = "") -> OCRResult:
         """Transcribe one image into verbatim OCR lines.
 
         Promises:

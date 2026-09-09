@@ -2,6 +2,7 @@
 from services.ocr_port import OCRLine, OCRResult
 from services.report_parser import ReportParser
 
+
 def ocr(*lines: str) -> OCRResult:
     return OCRResult(lines=tuple(OCRLine(text=t, confidence=0.9) for t in lines))
 

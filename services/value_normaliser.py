@@ -44,11 +44,17 @@ _OPEN_LOW_RE   = re.compile(rf"^-\s*(?P<hi>{_NUMBER})$")
 _BANGLA_DIGITS = str.maketrans("০১২৩৪৫৬৭৮৯", "0123456789")
 
 def to_float(text: str) -> float | None:
-    """'12,500' -> 12500.0 ; '0.8' -> 0.8 ; '12/03' -> None (not a plain number)."""
     text = text.strip().translate(_BANGLA_DIGITS)
     if not re.fullmatch(rf"[<>]?\s*{_NUMBER}", text):
         return None
-    return float(text.replace("<", "").replace(">", "").replace(",", "").strip())
+    t = text.replace("<", "").replace(">", "").strip().rstrip(",")   # "2," -> "2"
+    if "," in t:
+        int_part, _, frac = t.partition(",")
+        if "," in frac or len(frac) == 3:     # 1,234,567 / 12,500 -> thousands
+            t = t.replace(",", "")
+        elif 0 < len(frac) <= 2:              # 10,00 / 0,5 -> decimal comma
+            t = int_part + "." + frac
+    return float(t)
 
 
 def parse_value(text: str) -> Value | None:

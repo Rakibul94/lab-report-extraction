@@ -15,3 +15,8 @@ NUMBERS  canonical type is float; thousands commas stripped when comma+3 digits
          "1.2 x 10^3" (bare)   → 1200.0        multiplier applied
          "1.2 x 10^3/µL"       → 1.2 + unit "10^3/µL"   exponent belongs to the unit
 RULE     anything unparseable → field carries raw only, value null
+
+
+
+Limitation: Extraction of Text accuracy is quite poor.Based on the header block and test table on take home task some of the 
+extracted text was on placed accordingly to the labels.Some relevent labels went to unparsed section.

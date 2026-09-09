@@ -6,6 +6,7 @@ from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+
 class Settings(BaseSettings):
     """Typed configuration. Every field is an env var: LAB_PROVIDER, LAB_RECORDINGS_DIR, ..."""
 
@@ -17,17 +18,11 @@ class Settings(BaseSettings):
     )
 
     app_name: str = "lab-report-extraction"
-    provider: Literal["mock", "tesseract", "easyocr"] = "mock"   # default = mock: no creds, no model
+    provider: Literal["mock", "easyocr"] = "mock"   # default = mock: no creds, no model
     recordings_dir: Path = Path("recordings")
     default_recording: str = "report_001.json"
     max_upload_bytes: int = 10 * 1024 * 1024          # reject >10 MB at the boundary
 
-
-
-    # --- tesseract (system binary + traineddata files) ---
-    tesseract_cmd: str | None = None
-    tesseract_lang: str = "eng+ben"        # '+' = both scripts in one pass
-    tesseract_preprocess: bool = True
 
 
 

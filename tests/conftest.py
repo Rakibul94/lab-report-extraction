@@ -9,7 +9,6 @@ from fastapi.testclient import TestClient
 from main import create_app
 from services.config import Settings
 
-
 REPO = Path(__file__).resolve().parent.parent
 
 

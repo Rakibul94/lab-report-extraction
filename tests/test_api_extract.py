@@ -13,7 +13,9 @@ def test_extract_happy_path_full_shape(client):
     r = extract(client, "report_001.png")
     assert r.status_code == 200
     body = r.json()
-    assert set(body["meta"]) >= {"patient_name", "age", "sex", "report_date", "lab_name", "reference_no"}
+    assert set(body["meta"]) >= {
+        "patient_name", "age", "sex", "report_date", "lab_name", "reference_no"
+    }
     assert body["meta"]["patient_name"] == "John Doe"
     assert body["meta"]["report_date"] == "2024-03-15"
     first = body["results"][0]

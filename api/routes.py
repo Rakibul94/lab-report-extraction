@@ -2,10 +2,9 @@
 from __future__ import annotations
 
 import logging
+from typing import Annotated
 
-from pathlib import Path
-
-from fastapi import APIRouter, UploadFile, File  , HTTPException
+from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from api.schemas import ExtractResponse, MetaOut, ResultOut
 from services.config import Settings
@@ -20,7 +19,7 @@ def create_router(service: LabReportService, settings: Settings) -> APIRouter:
     router = APIRouter(prefix="/api/v1/documents", tags=["documents"])
 
     @router.post("/extract", response_model=ExtractResponse)
-    async def extract_report(image: UploadFile = File(...)) -> ExtractResponse:
+    async def extract_report(image: Annotated[UploadFile, File()]) -> ExtractResponse:
         data = await image.read()
 
         if len(data) > settings.max_upload_bytes:

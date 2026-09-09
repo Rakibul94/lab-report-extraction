@@ -2,14 +2,11 @@
 from __future__ import annotations
 
 import logging
-from pathlib import Path
+from dataclasses import dataclass, field
 
 from services.document_classifier import looks_like_lab_report
+from services.ocr_port import OCRProvider
 from services.report_parser import Meta, ReportParser, ResultRow
-from services.ocr_port import OCRProvider, OCRResult
-
-
-from dataclasses import dataclass, field
 
 logger = logging.getLogger(__name__)
 

@@ -1,7 +1,6 @@
 
 from services.document_classifier import looks_like_lab_report
 from services.ocr_port import OCRLine, OCRResult
-from tests.conftest import build_client
 
 
 def ocr(*lines: str) -> OCRResult:
