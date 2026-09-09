@@ -19,4 +19,4 @@ RULE     anything unparseable → field carries raw only, value null
 
 
 Limitation: Extraction of Text accuracy is quite poor.Based on the header block and test table on take home task some of the 
-extracted text was on placed accordingly to the labels.Some relevent labels went to unparsed section.
+extracted text was not placed accordingly to the labels.Some relevent labels went to unparsed section.
