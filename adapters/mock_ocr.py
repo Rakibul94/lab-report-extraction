@@ -5,9 +5,7 @@ import json
 import logging
 from pathlib import Path
 
-
-
-from services.ocr_port import OCRProvider, OCRLine, OCRResult, OCRPermanentError
+from services.ocr_port import OCRLine, OCRPermanentError, OCRProvider, OCRResult
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +20,9 @@ class MockOCRProvider(OCRProvider):
     and tests.
     """
 
-    def __init__(self, recordings_dir: str | Path, default_recording: str = "report_001.json",) -> None:
+    def __init__(
+        self, recordings_dir: str | Path, default_recording: str = "report_001.json"
+    ) -> None:
         self.recordings_dir = Path(recordings_dir)
         self.default_recording = self.recordings_dir / default_recording
 
@@ -38,7 +38,7 @@ class MockOCRProvider(OCRProvider):
 
     def _load(self, recording_path: Path) -> OCRResult:
         try:
-            with (open(recording_path, "r", encoding="utf-8") as file,):
+            with (open(recording_path, encoding="utf-8") as file,):
                 recording = json.load(file)
             return OCRResult(
                 lines=tuple(
