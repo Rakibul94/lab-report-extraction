@@ -6,7 +6,7 @@ from fastapi import FastAPI
 
 from adapters.factory import create_ocr_provider
 from api.routes import create_router
-from services.config import get_settings
+from services.config import Settings, get_settings
 from services.lab_report_service import LabReportService
 
 logging.basicConfig(level=logging.INFO)

@@ -1,0 +1,58 @@
+﻿0.63 sreaitt 0L3[2 7 CTZET8 POPULAR DIAGNOSTIC CENTRE LTD.
+0.52 Head Olfice House # T6 Road # 2, Dhanmondi R/A, Dhaka-1205
+0.67 POPULAR HOTLINE' ; [0636, 09666787804, E-mail ; info @populardingnosticcom; Web : www populardiagnosticcom
+1.00 LABORATORY SERVICES
+0.78 Patient Name Rakibul Islam Sample No Status 4902975 Final
+0.71 UHID 12332409 Sumple Collection Date 07/08/2026 10:I7AM
+0.56 AgelGen /DOB 25 Yrs Male Receiving Date 07/08/2026 1;S3AM
+0.87 Contact No 01341741677 Report Date 07/08/2026 2.21PM
+0.79 Relened By (PSYCHIATRY) PROR DRMEKHALA SARKAR MDBS, MPH FCPS Sample Type
+1.00 HAEMATOLOGY
+0.75 Test Name Result Unit Ref: Range Mcthod
+1.00 CBC
+0.62 Total Count
+0.75 White Blood Cells 4.00 10,00
+0.96 Flow Cytometry
+0.93 Neutrophils 2.00  7.00
+0.87 Lymphocyte Calculated (WBC Neutrophll %)
+0.81 2.87 1,00 3.00 Calculated (WBC Lymphocyte %=
+0.83 Monocyte 0.20 1,00 Calculated (WBC Monocyte %)
+0.87 Eosinophil 0.23 0.02 0.50
+0.88 Calculated (WBC Eoslnophil %)
+0.94 Differential Leucocyte Count
+0.87 Neutrophilvo 40.00 80.00 Fluorescent Flow Cytometry
+0.82 Lymphocyte%b 20.00 40.00
+0.77 Fluorescent Flow Cytometry
+0.88 Monocyte%o 2.00 - 10.00
+0.81 Fluorescent Flow Cytometry
+0.66 Eosinophil% 1.00 6,00 Fluorescent Flow Cytometry
+0.58 Basophilvo Gs Fluorescent Flow Cytometry
+0.97 Red Blood Cells 5.65 million/ul 4.50 5.50
+0.99 Impedance
+0.80 Haemoglobin 13.90 g/dL 13.00 17.00 Photometric
+1.00 HCT 42.90 38.90 50.90
+0.99 Calculated (RBC MCV)
+0.97 MCV 75.9
+0.80 Impedance
+1.00 MCH 24.6 Calculated
+1.00 (HGB RBC)
+0.88 MCHC 32.4 L g/L Calculated (HGB
+1.00 HCT)
+0.73 RDW-CV(%) 13.0 Calculated (from RBC histogram)
+0.97 Platelets 264 150 410
+0.99 Impedance
+0.86 MPV 10.20 8,00 11,00
+1.00 Impedance
+0.85 PCT 0.27 0.13 0.40 Calculated (PLT
+0.63 MPV 10,000)
+0.95 PDW 11.60 8.30 15.90 Impedance
+0.96 ESR mm/hr
+0.99 Westergren Method
+0.40 Dr: Md, Mostasln Billah Tilas
+0.02 Melocr (Bhoc No Ai3ostu)
+0.42 Popular Diagnoallc Cento Lid. Dhannondi, Dhake-1205
+0.09 Dr. Shulkh HuutlluzEMMun
+0.57 MBRS, DCP(CInical Pathology), MD (Labratory
+0.71 Medlclne), FCS (Health)
+0.90 Consultant
+0.35 Prcpared By: Mr: RAYHAN KABIR Printed IJy: REFONR Frinted ut 0840872026 I4,55 Faue:

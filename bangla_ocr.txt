@@ -1,0 +1,8 @@
+﻿0.48 CITYDIAGNOSTIC LABORATORY
+0.99 রোগীর নাম মোঃ রফিকুল ইসলাম
+0.66 বয়স ৩৪ বছর লিঙ্গ পুরুষ
+0.42 রিপোর্টের তারিখ : ১৫০০৩ ২০২৪
+0.68 রেফারেন্স নং _AB-2024-00999
+0.71 INVVESTIGATION
+0.63 Haemoglobin 11.2 gm/dl 13.0 - 17.0 LOW/
+0.93 Fasting Blood Sugar 98 mg/dL 70 - 110

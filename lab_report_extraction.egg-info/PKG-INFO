@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: lab-report-extraction
+Version: 0.1.0
+Summary: Lab report OCR extraction service, CPU-only
+Requires-Python: >=3.11
+Requires-Dist: fastapi>=0.141
+Requires-Dist: uvicorn[standard]>=0.52
+Requires-Dist: pydantic>=2.13
+Requires-Dist: pydantic-settings>=2.15
+Requires-Dist: python-multipart>=0.0.32
+Requires-Dist: numpy>=2.4
+Requires-Dist: pillow>=12.3
+Provides-Extra: ocr
+Requires-Dist: easyocr>=1.7.2; extra == "ocr"
+Provides-Extra: dev
+Requires-Dist: pytest>=9.1; extra == "dev"
+Requires-Dist: httpx>=0.28; extra == "dev"
+Requires-Dist: ruff>=0.6; extra == "dev"
+Requires-Dist: mypy>=1.11; extra == "dev"
