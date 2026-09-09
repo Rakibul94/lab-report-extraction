@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 class EasyOCRProvider(OCRProvider):
-    "This is the OCR engine is selected for Real OCR"
+    "This OCR engine is selected for Real OCR"
     """Easy OCR: EasyOCR detection+recognition, CPU-only, bilingual.
 
     The ONLY file importing easyocr. One detector pass feeds two
@@ -53,9 +53,17 @@ class EasyOCRProvider(OCRProvider):
     def extract(self, image_bytes: bytes, *, filename: str = "") -> OCRResult:
         image = self._load(image_bytes)
         try:
-            raw = self._reader.readtext(image, detail=1, paragraph=False, canvas_size = 2560,
-                                         decoder="beamsearch", beamWidth=5, contrast_ths=0.1,                   
-                                         adjust_contrast=0.5, add_margin=0.15,)   #Run detector + recognizer
+            raw = self._reader.readtext(
+                image,
+                detail=1,
+                paragraph=False,
+                canvas_size=2560,
+                decoder="beamsearch",
+                beamWidth=5,
+                contrast_ths=0.1,
+                adjust_contrast=0.5,
+                add_margin=0.15,
+            )  # Run detector + recognizer
         except (RuntimeError, ValueError) as e:
             raise OCRTemporaryError(f"EasyOCR engine error: {e}") from e
         if not raw:                       # blank image: valid, zero lines

@@ -20,9 +20,8 @@ class Settings(BaseSettings):
     app_name: str = "lab-report-extraction"
     provider: Literal["mock", "easyocr"] = "mock"   # default = mock: no creds, no model
     recordings_dir: Path = Path("recordings")
-    default_recording: str = "report_001.json"
+    default_recording: str = "not_a_lab_report.json"
     max_upload_bytes: int = 10 * 1024 * 1024          # reject >10 MB at the boundary
-
 
 
 

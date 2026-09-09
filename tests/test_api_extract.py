@@ -29,6 +29,9 @@ def test_receipt_degrades_gracefully_over_http(client):
     assert r.status_code == 200                 # NOT an error - a truthful answer
     body = r.json()
     assert body["is_lab_report"] is False and body["results"] == []
+    assert all(field is None for field in body["meta"].values())   # nothing invented
+    assert any("does not appear" in w for w in body["warnings"])
+    assert any("Latte 4.50" in w for w in body["warnings"])       
 
 
 def test_empty_upload_rejected(client):
@@ -38,3 +41,11 @@ def test_empty_upload_rejected(client):
 def test_oversized_upload_rejected():
     small = build_client(max_upload_bytes=8)
     assert extract(small, "x.png", b"0123456789").status_code == 413
+
+
+def test_unknown_filename_degrades_to_non_lab_default(client):
+    r = extract(client, "IMG_2043.jpg")        # no recordings/IMG_2043.json
+    assert r.status_code == 200
+    body = r.json()
+    assert body["is_lab_report"] is False and body["results"] == []
+    assert all(field is None for field in body["meta"].values())

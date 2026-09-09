@@ -27,7 +27,7 @@ def boxes_to_reading_order(items: list, gap_factor: float = 3.0) -> OCRResult:
         heights = [bottom(i) - top(i) for i in row]
         med_h = sorted(heights)[len(heights) // 2]
         segment = [row[0]]
-        for prev, cur in zip(row, row[1:]):
+        for prev, cur in zip(row, row[1:], strict=False):
             gap = x_left(cur) - x_right(prev)
             if gap > gap_factor * med_h:          # column boundary
                 lines.append(segment)

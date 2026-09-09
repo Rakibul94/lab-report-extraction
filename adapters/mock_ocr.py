@@ -15,7 +15,7 @@ class MockOCRProvider(OCRProvider):
     """Replays recorded neutral-format provider responses.
 
     Recording selection: if "<stem>.json" matches the uploaded filename,
-    play that recording; otherwise play the default. The uploaded pixels
+    play that recording; otherwise play the not a lab report default. The uploaded pixels
     are never read — the filename is the scenario switch used by demos
     and tests.
     """
@@ -34,7 +34,14 @@ class MockOCRProvider(OCRProvider):
 
     def _select_recording(self, stem: str) -> Path:
         candidate = self.recordings_dir / f"{stem}.json"
-        return candidate if candidate.is_file() else self.default_recording
+        if candidate.is_file():
+            return candidate
+        logger.warning(
+            "MOCK OCR: no recording %r - unknown filename degrades to the non-lab default",
+            candidate.name,
+        )
+        return self.default_recording
+        
 
     def _load(self, recording_path: Path) -> OCRResult:
         try:
