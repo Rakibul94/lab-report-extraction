@@ -18,6 +18,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     service = LabReportService(provider)              # service gets a port, unaware of which one
     app = FastAPI(title=settings.app_name)
     app.include_router(create_router(service, settings))
+
+    @app.get("/health")
+    def health() -> dict[str, str]:
+        return {"status": "ok", "provider": settings.provider}
+
     return app
 
 
