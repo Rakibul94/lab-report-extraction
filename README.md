@@ -3,6 +3,20 @@ Fastapi App that performs OCR on lab reports of both english and bangla written 
 
 testdata repository contains actual lab reports photos from different hospitals.
 
+How to run:
+
+bash:
+
+git clone https://github.com/Rakibul94/lab-report-extraction.git
+
+pip install -e ".[dev]"
+
+uvicorn main:app --reload
+
+Running test:
+
+pytest -v
+
 
 ## Architecture
 
